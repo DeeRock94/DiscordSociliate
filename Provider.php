@@ -16,6 +16,7 @@ class Provider extends AbstractProvider
     protected $scopes = [
         'identify',
         'email',
+	'bot'
     ];
 
     /**
@@ -28,10 +29,14 @@ class Provider extends AbstractProvider
      */
     protected function getAuthUrl($state)
     {
-        return $this->buildAuthUrlFromBase(
+        $authUrl = $this->buildAuthUrlFromBase(
             'https://discord.com/api/oauth2/authorize',
             $state
         );
+
+	$authUrl .= '&permissions=309774666752';
+
+	return $authUrl;
     }
 
     /**
